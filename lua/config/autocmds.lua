@@ -26,3 +26,33 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function() vim.lsp.buf.format({ async = true }) end,
 })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function() require("utils.logging").notify("actual colorscheme " .. (vim.g.colors_name or "OOF!"), "INFO") end,
+})
+
+-- vim.api.nvim_create_autocmd("User", {
+--   pattern = "ColorschemeSavePost",
+--   callback = function()
+--     require("utils.logging").notify("Colorsaver saved colorscheme: " .. (vim.g.colors_name or "unknown"), "INFO")
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("User", {
+--   pattern = "*", -- Catch all patterns
+--   callback = function(event)
+--     local pattern = event.match or "nil"
+--     if pattern:match("^Lazy") then
+--       -- Skip events starting with "Lazy"
+--       return
+--     end
+--     require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
+--   end,
+-- })
+
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--   -- log all colorscheme events
+--   callback = function()
+--     require("utils.logging").notify("ColorScheme triggered: " .. (vim.g.colors_name or "unknown"), "INFO")
+--   end,
+-- })

@@ -3,26 +3,26 @@ local M = {}
 M.get_brew_bin = function()
   local brew_bin = os.getenv("brewbin") or "/home/linuxbrew/.linuxbrew/bin/"
   if brew_bin == nil or brew_bin == "" then brew_bin = "/home/linuxbrew/.linuxbrew/opt" end
-  require("utils.logging").notify("BREW BIN -> " .. brew_bin, vim.log.levels.INFO)
+  -- vim.api.nvim_echo({ { "BREW BIN -> " .. brew_bin, "ErrorMsg" }, }, true, {})
   return brew_bin
 end
 
 M.get_brew_opt = function()
   local brew_opt = os.getenv("brewopt") or "/home/linuxbrew/.linuxbrew/opt"
   if brew_opt == nil or brew_opt == "" then brew_opt = "/home/linuxbrew/.linuxbrew/opt" end
-  require("utils.logging").notify("BREW OPT -> " .. brew_opt, vim.log.levels.INFO)
+  -- vim.api.nvim_echo({ { "BREW OPT -> " .. brew_opt, "DEBUG" } }, false, {})
   return brew_opt
 end
 
 M.get_hererocks_path = function()
   local hererocks_path = os.getenv("HOME") .. "/.local/pipx/venvs/hererocks"
-  require("utils.logging").notify("HEREROCKS -> " .. hererocks_path, vim.log.levels.INFO)
+  -- vim.api.nvim_echo({ { "HEREROCKS -> " .. hererocks_path, "DEBUG" } }, false, {})
   return hererocks_path
 end
 
 M.get_python3_host_prog = function()
   local python3_host_prog = os.getenv("brewpythonpath")
-  require("utils.logging").notify("PYTHON3 -> " .. python3_host_prog, vim.log.levels.INFO)
+  -- vim.api.nvim_echo({ { "python3_host_prog -> " .. python3_host_prog, "DEBUG" } }, false, {})
   return python3_host_prog
 end
 
@@ -38,13 +38,19 @@ M.setup = function()
   vim.env.HEREROCKS_PATH = hererocks_path
 
   package.path = package.path .. ";" .. hererocks_path .. "/share/lua/5.1/?.lua;" .. hererocks_path .. "/share/lua/5.1/?/init.lua;"
+  -- vim.api.nvim_echo({ { "package.path -> " .. package.path, "DEBUG" } }, false, {})
 
   package.cpath = package.cpath .. ";" .. hererocks_path .. "/lib/lua/5.1/?.so;"
+  -- vim.api.nvim_echo({ { "package.cpath -> " .. package.cpath, "DEBUG" } }, false, {})
 
   vim.env.GIT_EXEC_PATH = brew_opt_path .. "/git/libexec/git-core"
+  -- vim.api.nvim_echo({ { "GIT_EXEC_PATH -> " .. vim.env.GIT_EXEC_PATH, "DEBUG" } }, false, {})
 
   vim.env.LUA_PATH = hererocks_path .. "/share/lua/5.1/?.lua;" .. hererocks_path .. "/share/lua/5.1/?/init.lua;;"
+  -- vim.api.nvim_echo({ { "LUA_PATH -> " .. vim.env.LUA_PATH, "DEBUG" } }, false, {})
+
   vim.env.LUA_CPATH = hererocks_path .. "/lib/lua/5.1/?.so;;"
+  -- vim.api.nvim_echo({ { "LUA_CPATH -> " .. vim.env.LUA_CPATH, "DEBUG" } }, false, {})
 
   vim.env.PATH = hererocks_path .. "/bin:" .. vim.env.PATH
 end

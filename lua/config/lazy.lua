@@ -14,6 +14,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("utils.env").setup()
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
@@ -30,7 +32,24 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  install = {
+    colorscheme = {
+      "catppuccin",
+      "tokyonight",
+      "habamax",
+      "falcon",
+      "night-owl",
+      "rose-pine",
+      "oxocarbon",
+      "oh-lucy",
+      "tokyonight",
+      "kangawa",
+      "bamboo",
+      "zaibatsu",
+    },
+  },
+  background = "dark",
+  ui = { backdrop = 60, border = "rounded" },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
@@ -39,15 +58,44 @@ require("lazy").setup({
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
+        "2html_plugin",
+        "getscript",
+        "getscriptPlugin",
         "gzip",
+        "logipat",
+        "man",
         -- "matchit",
         -- "matchparen",
+        "netrw",
+        "netrwFileHandlers",
         -- "netrwPlugin",
+        "netrwSettings",
+        "osc52",
+        "rplugin",
+        "rrhelper",
+        "shada",
+        "spec",
+        "tar",
         "tarPlugin",
         "tohtml",
         "tutor",
         "zipPlugin",
       },
     },
+  },
+  pkg = {
+    enabled = true,
+    cache = vim.fn.stdpath("state") .. "/lazy/pkg-cache.lua",
+    -- the first package source that is found for a plugin will be used.
+    sources = {
+      "lazy",
+      "rockspec", -- will only be used when rocks.enabled is true
+      "packspec",
+    },
+  },
+  rocks = {
+    enabled = true,
+    root = vim.fn.stdpath("data") .. "/lazy-rocks",
+    server = "https://nvim-neorocks.github.io/rocks-binaries/",
   },
 })
