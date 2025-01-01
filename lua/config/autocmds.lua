@@ -27,8 +27,24 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function() vim.lsp.buf.format({ async = true }) end,
 })
 
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function() require("utils.logging").notify("actual colorscheme " .. (vim.g.colors_name or "OOF!"), vim.log.levels.INFO) end,
+-- })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function() vim.notify("Colorscheme changed to: " .. (vim.g.colors_name or "none"), vim.log.levels.INFO) end,
+})
+
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function() require("utils.logging").notify("actual colorscheme " .. (vim.g.colors_name or "OOF!"), "INFO") end,
+  callback = function() vim.notify("Restored colorscheme: " .. (vim.g.colors_name or "none"), vim.log.levels.INFO) end,
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if not vim.g.colors_name then
+      vim.cmd.colorscheme("tokyonight-day") -- Set your default fallback colorscheme
+    end
+  end,
 })
 
 -- vim.api.nvim_create_autocmd("User", {

@@ -12,6 +12,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("utils.env").setup()
@@ -34,21 +35,30 @@ require("lazy").setup({
   },
   install = {
     colorscheme = {
-      "catppuccin",
-      "tokyonight",
-      "habamax",
-      "falcon",
-      "night-owl",
-      "rose-pine",
-      "oxocarbon",
-      "oh-lucy",
-      "tokyonight",
-      "kangawa",
       "bamboo",
+      "catppuccin",
+      "deepwhite",
+      "emerald",
+      "falcon",
+      "habamax",
+      "kangawa",
+      "melange",
+      "miasma",
+      "mini.base16",
+      "night-owl",
+      "nvim-solar-paper",
+      "ofirkai",
+      "oh-lucy",
+      "onedark",
+      "oxocarbon",
+      "rose-pine",
+      "starry",
+      "tokyonight",
+      "whitch",
       "zaibatsu",
     },
   },
-  colorscheme = "tokyonight-day",
+  colorscheme = "tokyonight-day", -- "oh-lucy-evening",
   background = "dark",
   ui = { backdrop = 60, border = "rounded" },
   checker = {
