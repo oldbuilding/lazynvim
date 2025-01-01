@@ -12,7 +12,6 @@ function M.find_project_root()
   end
 
   local result = current_path:absolute()
-  -- require("noice").notify("PROJECT ROOT -> " .. result, vim.log.levels.INFO)
   return result
 end
 
@@ -21,15 +20,11 @@ function M.get_editorconfig_path()
   local project_root = M.find_project_root()
   if project_root then
     local project_config = Path:new(project_root, ".editorconfig")
-    if project_config:exists() then
-      -- require("noice").notify(".EDITORCONFIG -> found", vim.log.levels.INFO)
-      return project_config:absolute()
-    end
-    -- require("noice").notify(".EDITORCONFIG -> NOT found", vim.log.levels.WARN)
+    if project_config:exists() then return project_config:absolute() end
   end
   return vim.fn.expand("~/.editorconfig")
 end
 
-function M.get_mason_bin() return vim.fn.expand("~/.local/share/"  .. (os.getenv("NVIM_APPNAME") or "nvim") .. "/mason/bin") end
+function M.get_mason_bin() return vim.fn.expand("~/.local/share/" .. (os.getenv("NVIM_APPNAME") or "nvim") .. "/mason/bin") end
 
 return M

@@ -48,6 +48,7 @@ require("lazy").setup({
       "zaibatsu",
     },
   },
+  colorscheme = "tokyonight-day",
   background = "dark",
   ui = { backdrop = 60, border = "rounded" },
   checker = {
