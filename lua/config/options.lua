@@ -9,10 +9,11 @@ local update_time_ms = 300 -- save swap file and trigger CursorHold
 local keymap_sequence_timeout_ms = 250 -- time (ms) to wait for a mapped sequence to complete (default 1000)
 local spell_util = require("utils.spell")
 local spellfile_path, spellfile_name = spell_util.get_spell_directory_and_filename()
+local font_definition = { "VictorMonoNerdFontMono", ":h18" }
 
 M._get_vim_global_opts = function()
   return {
-    guifont = { "VictorMonoNerdFontMono", ":h16" },
+    guifont = font_definition,
     mapleader = ",", -- Set space as the leader key
     maplocalleader = " ", -- Set local leader key
     -- python3_host_prog = '/path/to/python3',  -- Register Python 3 for Neovim
@@ -54,7 +55,7 @@ M._get_vim_opts = function()
     formatoptions = "jcroqlnt",
     grepformat = "%f:%l:%c:%m",
     grepprg = "rg --vimgrep",
-    guifont = { "VictorMonoNerdFontMono", ":h16" },
+    guifont = font_definition,
     -- guifont = "VictorMono NF:h17",
     hidden = true,
     history = 10000,
@@ -156,11 +157,16 @@ M.setup = function()
   local g = M._get_vim_global_opts()
   for k, v in pairs(g) do
     vim.g[k] = v
+    -- vim.notify(string.format("Global Option Set: %s = %s", k, vim.inspect(v)), vim.log.levels.INFO)
   end
   local opt = M._get_vim_opts()
   for k, v in pairs(opt) do
     vim.opt[k] = v
+    -- vim.notify(string.format("Option Set: %s = %s", k, vim.inspect(v)), vim.log.levels.INFO)
   end
 end
+
+-- must call setup() because lazyvim will not
+M.setup()
 
 return M

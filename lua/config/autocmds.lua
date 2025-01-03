@@ -39,9 +39,21 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function() vim.notify("Restored colorscheme: " .. (vim.g.colors_name or "none"), vim.log.levels.INFO) end,
 })
 
+vim.api.nvim_create_autocmd("VimResized", {
+  group = vim.api.nvim_create_augroup("snacks_notifier", {}),
+  callback = function()
+    for _, notif in pairs(self.queue) do
+      notif.dirty = true
+    end
+    self.sorted = nil
+  end,
+})
+
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    if not vim.g.colors_name then
+    local current_colorscheme = vim.g.colors_name
+    require("utils.logging").notify(current_colorscheme, "INFO")
+    if current_colorscheme == nil or current_colorscheme == "night-owl" then
       vim.cmd.colorscheme("tokyonight-day") -- Set your default fallback colorscheme
     end
   end,
@@ -54,17 +66,17 @@ vim.api.nvim_create_autocmd("VimEnter", {
 --   end,
 -- })
 --
--- vim.api.nvim_create_autocmd("User", {
---   pattern = "*", -- Catch all patterns
---   callback = function(event)
---     local pattern = event.match or "nil"
---     if pattern:match("^Lazy") then
---       -- Skip events starting with "Lazy"
---       return
---     end
---     require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
---   end,
--- })
+vim.api.nvim_create_autocmd("User", {
+  pattern = "*", -- Catch all patterns
+  callback = function(event)
+    local pattern = event.match or "nil"
+    if pattern:match("^Lazy") then
+      -- Skip events starting with "Lazy"
+      return
+    end
+    require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
+  end,
+})
 
 -- vim.api.nvim_create_autocmd("ColorScheme", {
 --   -- log all colorscheme events

@@ -16,6 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("utils.env").setup()
+require("config.options").setup()
 
 require("lazy").setup({
   spec = {
