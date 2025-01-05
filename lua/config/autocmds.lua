@@ -9,8 +9,6 @@
 
 vim.cmd([[autocmd VimEnter * highlight URL ctermfg=Blue guifg=Blue]])
 
-vim.cmd([[autocmd VimEnter * highlight URL ctermfg=Blue guifg=Blue]])
-
 vim.api.nvim_create_autocmd("BufReadPre", {
   callback = function()
     local ok, stats = pcall(vim.loop.fs_stat, vim.fn.expand("<afile>"))
@@ -48,7 +46,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     local current_colorscheme = vim.g.colors_name
     if current_colorscheme == nil or current_colorscheme == "night-owl" then
       vim.cmd.colorscheme("tokyonight-day") -- Set your default fallback colorscheme
-      vim.notify("Colorscheme changed to: " .. (vim.g.colors_name or "none"), vim.log.levels.TRACE)
+      vim.notify("Colorscheme: " .. (vim.g.colors_name or "none"), vim.log.levels.DEBUG, { title = "Colorscheme" })
     end
   end,
 })
@@ -61,6 +59,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
 --       -- Skip events starting with "Lazy"
 --       return
 --     end
---     require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
+--     vim.notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), vim.log.levels.DEBUG, { title = "Event Logger" })
+--     -- require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
 --   end,
 -- })
+--
