@@ -9,8 +9,6 @@
 
 vim.cmd([[autocmd VimEnter * highlight URL ctermfg=Blue guifg=Blue]])
 
-vim.cmd([[autocmd VimEnter * highlight URL ctermfg=Blue guifg=Blue]])
-
 vim.api.nvim_create_autocmd("BufReadPre", {
   callback = function()
     local ok, stats = pcall(vim.loop.fs_stat, vim.fn.expand("<afile>"))
@@ -27,17 +25,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function() vim.lsp.buf.format({ async = true }) end,
 })
 
--- vim.api.nvim_create_autocmd("VimEnter", {
---   callback = function() require("utils.logging").notify("actual colorscheme " .. (vim.g.colors_name or "OOF!"), vim.log.levels.INFO) end,
--- })
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function() vim.notify("Colorscheme changed to: " .. (vim.g.colors_name or "none"), vim.log.levels.INFO) end,
-})
-
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function() vim.notify("Restored colorscheme: " .. (vim.g.colors_name or "none"), vim.log.levels.INFO) end,
-})
+vim.api.nvim_create_user_command("CopyMessages", function()
+  local messages = vim.fn.execute("messages")
+  vim.fn.setreg("+", messages) -- Copy to the system clipboard
+  print("Messages copied to clipboard!")
+end, {})
 
 vim.api.nvim_create_autocmd("VimResized", {
   group = vim.api.nvim_create_augroup("snacks_notifier", {}),
@@ -45,42 +37,30 @@ vim.api.nvim_create_autocmd("VimResized", {
     for _, notif in pairs(self.queue) do
       notif.dirty = true
     end
-    self.sorted = nil
+    -- self.sorted = nil
   end,
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     local current_colorscheme = vim.g.colors_name
-    require("utils.logging").notify(current_colorscheme, "INFO")
     if current_colorscheme == nil or current_colorscheme == "night-owl" then
       vim.cmd.colorscheme("tokyonight-day") -- Set your default fallback colorscheme
+      vim.notify("Colorscheme: " .. (vim.g.colors_name or "none"), vim.log.levels.DEBUG, { title = "Colorscheme" })
     end
   end,
 })
 
 -- vim.api.nvim_create_autocmd("User", {
---   pattern = "ColorschemeSavePost",
---   callback = function()
---     require("utils.logging").notify("Colorsaver saved colorscheme: " .. (vim.g.colors_name or "unknown"), "INFO")
+--   pattern = "*", -- Catch all patterns
+--   callback = function(event)
+--     local pattern = event.match or "nil"
+--     if pattern:match("^Lazy") then
+--       -- Skip events starting with "Lazy"
+--       return
+--     end
+--     vim.notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), vim.log.levels.DEBUG, { title = "Event Logger" })
+--     -- require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
 --   end,
 -- })
 --
-vim.api.nvim_create_autocmd("User", {
-  pattern = "*", -- Catch all patterns
-  callback = function(event)
-    local pattern = event.match or "nil"
-    if pattern:match("^Lazy") then
-      -- Skip events starting with "Lazy"
-      return
-    end
-    require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
-  end,
-})
-
--- vim.api.nvim_create_autocmd("ColorScheme", {
---   -- log all colorscheme events
---   callback = function()
---     require("utils.logging").notify("ColorScheme triggered: " .. (vim.g.colors_name or "unknown"), "INFO")
---   end,
--- })
