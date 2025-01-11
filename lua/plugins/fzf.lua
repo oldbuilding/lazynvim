@@ -3,8 +3,15 @@ return {
     "ibhagwan/fzf-lua",
     opts = {
       winopts = {
+        winblend = 0, -- Make popups opaque
+        row = 0.5, -- 0 top, 1 bottom
+        col = 0.5, -- 0 top, 1 bottom
+        border = "rounded",
+        -- Backdrop opacity, 0 is fully opaque, 100 is fully transparent (i.e. disabled)
+        backdrop = 0,
         preview = {
-          wrap = "wrap", -- Enable content wrapping in the preview window
+          border = "rounded",
+          wrap = true,
         },
       },
     },

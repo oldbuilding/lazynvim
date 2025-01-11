@@ -61,7 +61,11 @@ require("lazy").setup({
   },
   colorscheme = "tokyonight-day", -- "oh-lucy-evening",
   background = "dark",
-  ui = { backdrop = 60, border = "rounded" },
+  ui = {
+    backdrop = 0, -- 0 opaque, 100 transparent
+    border = "rounded",
+    wrap = true,
+  },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update

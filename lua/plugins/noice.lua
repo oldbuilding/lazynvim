@@ -26,6 +26,32 @@ return {
       bottom_search = false,
       command_palette = true,
       long_message_to_split = true,
+      lsp_doc_border = true,
+    },
+    views = {
+      popupmenu = {
+        backend = "nui",
+        win_options = {
+          winblend = 0, -- opaque
+        },
+        cmdline_popup = {
+          position = {
+            row = "50%",
+            col = "50%",
+          },
+          size = {
+            width = "auto",
+            height = "auto",
+          },
+          border = {
+            style = "rounded",
+            padding = { 1, 1 },
+          },
+          win_options = {
+            winblend = 0, -- opaque
+          },
+        },
+      },
     },
   },
   config = function(_, opts)

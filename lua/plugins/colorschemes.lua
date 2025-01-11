@@ -1,5 +1,15 @@
 return {
   {
+    "folke/tokyonight.nvim",
+    opts = {
+      transparent = false,
+      -- styles = {
+      --   sidebars = "transparent",
+      --   floats = "transparent",
+      -- },
+    },
+  },
+  {
     "https://gitlab.com/bartekjaszczak/finale-nvim",
     priority = 1000,
     config = function()
@@ -82,7 +92,7 @@ return {
         italics = true,
         underline = true,
         undercurl = true,
-        transparent_background = true,
+        transparent_background = false,
         vim.api.nvim_set_hl(0, "CursorLine", { ctermbg = "Yellow" }),
       })
     end,
