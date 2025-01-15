@@ -1,0 +1,65 @@
+return {
+  "nvim-neo-tree/neo-tree.nvim",
+  cmd = "Neotree",
+  keys = {
+    {
+      "<leader>e",
+      function()
+        require("neo-tree.command").execute({
+          toggle = false,
+          focus = true,
+          dir = LazyVim.root(),
+        })
+      end,
+      desc = "Explorer NeoTree (Root Dir)",
+    },
+    {
+      "<leader>fE",
+      function()
+        require("neo-tree.command").execute({
+          toggle = false,
+          focus = true,
+          dir = vim.uv.cwd(),
+        })
+      end,
+      desc = "Explorer NeoTree (cwd)",
+    },
+    {
+      "<leader>ge",
+      function() require("neo-tree.command").execute({ source = "git_status", toggle = true, focus = true }) end,
+      desc = "Git Explorer",
+    },
+    {
+      "<leader>be",
+      function() require("neo-tree.command").execute({ source = "buffers", toggle = true, focus = true }) end,
+      desc = "Buffer Explorer",
+    },
+  },
+  opts = {
+    window = {
+      position = "left",
+    },
+    filesystem = {
+      filtered_items = {
+        visible = true,
+        hide_dotfiles = false,
+        hide_by_name = {
+          "bin",
+          "obj",
+          "node_modules",
+          "__pycache__",
+        },
+        always_show_by_pattern = { -- uses glob style patterns
+          ".env*",
+        },
+        never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+          ".DS_Store",
+          "thumbs.db",
+        },
+        never_show_by_pattern = { -- uses glob style patterns
+          ".null-ls_*",
+        },
+      },
+    },
+  },
+}
