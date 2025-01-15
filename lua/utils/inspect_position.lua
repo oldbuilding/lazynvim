@@ -1,3 +1,5 @@
+if true then return {} end
+
 local M = {}
 
 M.show_hover = function(data, comment)

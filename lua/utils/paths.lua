@@ -27,4 +27,6 @@ end
 
 function M.get_mason_bin() return vim.fn.expand("~/.local/share/" .. (os.getenv("NVIM_APPNAME") or "nvim") .. "/mason/bin") end
 
+function M.get_brew_opt() return os.getenv("brewopt") or "" end
+function M.get_brew_bin() return os.getenv("brewbin") or "" end
 return M
