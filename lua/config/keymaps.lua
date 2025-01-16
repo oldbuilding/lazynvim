@@ -4,6 +4,7 @@
 
 vim.keymap.set({ "n" }, ":", ";", { desc = "Swap ; with :", silent = true, noremap = true })
 vim.keymap.set({ "n" }, ";", ":", { desc = "Swap : with ;", silent = true, noremap = true })
+vim.keymap.set({"n"}, "<leader>uB", "<Cmd>set winblend=0<CR>", { desc="Opaque!", silent = true, noremap = true })
 
 -- vim.keymap.set("n", "<leader>ui", function()
 --   -- Clear the message area first to avoid stale content

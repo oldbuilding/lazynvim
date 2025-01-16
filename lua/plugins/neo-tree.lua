@@ -5,14 +5,36 @@ return {
     {
       "<leader>e",
       function()
+        local reveal_file_ = vim.fn.expand('%:p')
+        if (reveal_file_ == '') then
+          reveal_file_ = vim.fn.getcwd()
+        else
+          local f = io.open(reveal_file_, "r")
+          if (f) then
+            f.close(f)
+          else
+            reveal_file_ = vim.fn.getcwd()
+          end
+        end
         require("neo-tree.command").execute({
           toggle = false,
           focus = true,
+          reveal_file = reveal_file_,
           dir = LazyVim.root(),
         })
       end,
-      desc = "Explorer NeoTree (Root Dir)",
+      desc = "Explorer NeoTree (current file or cwd)",
     },
+    {
+      "<leader>fe",
+      function()
+        require("neo-tree.command").execute({
+          toggle = false,
+          focus = true,
+          dir = vim.uv.cwd(),
+        })
+      end,
+      desc = "Explorer NeoTree (cwd)",
     {
       "<leader>fE",
       function()
@@ -23,6 +45,7 @@ return {
         })
       end,
       desc = "Explorer NeoTree (cwd)",
+    },
     },
     {
       "<leader>ge",

@@ -4,6 +4,23 @@ local M = {}
 -- Original snippet from `config/lsp.lua`: lsp_setup_opts["lua_ls"]
 -- We also had an on_init that disables formatting.
 
+-- example for lua_ls:
+-- lua_ls = {
+--   settings = {
+--     lua = {
+--       runtime = { version = "luajit" },
+--       diagnostics = { globals = { "vim" } },
+--       workspace = {
+--         checkthirdparty = false,
+--       },
+--     },
+--   },
+--   -- if you want to disable formatting so that `null-ls` or others handle it:
+--   on_init = function(client, _)
+--     client.server_capabilities.documentformattingprovider = false
+--   end,
+-- },
+
 M.lua_ls = {
   settings = {
     Lua = {

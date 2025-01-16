@@ -50,35 +50,13 @@ end
 --    you can do:  local lua_ls = require("config.lsp.lua_ls").lua_ls
 --------------------------------------------------------------------------------
 local servers_config = {
-  -- Example for lua_ls:
-  lua_ls = {
-    settings = {
-      Lua = {
-        runtime = { version = "LuaJIT" },
-        diagnostics = { globals = { "vim" } },
-        workspace = {
-          checkThirdParty = false,
-        },
-      },
-    },
-    -- If you want to disable formatting so that `null-ls` or others handle it:
-    on_init = function(client, _)
-      client.server_capabilities.documentFormattingProvider = false
-    end,
-  },
-
-  -- Another example for python-based servers, if you keep them inline:
-  basedpyright = {
-    settings = {
-      python = {
-        analysis = {
-          typeCheckingMode = "basic",
-          autoSearchPaths = true,
-        },
-      },
-    },
-  },
-  -- Or "ruff", "bashls", "clangd", etc. can go here as well...
+  basedpyright = require("config.lsp.python").basedpyright,
+  ruff = require("config.lsp.python").ruff,
+  pyright = require("config.lsp.python").pyright,
+  lua_ls = require("config.lsp.lua_ls").lua_ls,
+  yaml_language_server = require("config.lsp.yamlls").yaml_language_server,
+  clangd = require("config.lsp.clangd").clangd,
+  bashls = require("config.lsp.bashls").bashls,
 }
 
 --------------------------------------------------------------------------------
@@ -155,9 +133,9 @@ function M.setup_lsp()
       "clangd",
       "lua_ls",
       "ruff",
-      "shfmt",
-      "stylua",
       "yamlls",
+      -- other LSP tools...
+      -- define NON-lsp tooling in plugins/mason.lua with require("mason").setup({ ... })
     },
   })
 

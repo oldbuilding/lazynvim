@@ -1,58 +1,77 @@
 -- lua/config/lsp/python.lua
 local M = {}
 
+local function find_python_venv()
+  -- 1) Get your current project root.
+  --    If you have more advanced logic for "project root",
+  --    use that instead of `vim.fn.getcwd()`.
+  local root = vim.fn.getcwd()
+
+  -- 2) Check each candidate directory for a `bin/python` that is executable
+  for _, dirname in ipairs({ ".venv", ".pie" }) do
+    local candidate = root .. "/" .. dirname .. "/bin/python"
+    if vim.fn.executable(candidate) == 1 then
+      return candidate
+    end
+  end
+
+  -- 3) If none found, fallback to system python3 in PATH
+  return vim.fn.exepath("python3")
+end
+
 --------------------------------------------------------------------------------
 -- BASEDPYRIGHT / PYRIGHT
 --------------------------------------------------------------------------------
 -- In your original config, these are the 'basedpyright' and 'pyright' blocks.
 -- They share a function that returns settings for analysis.
 
-local function pyright_opts(setup_name)
+M.basedpyright = function()
   return {
     settings = {
-      [setup_name] = {
+      python = {
         analysis = {
           -- For details, see:
           --   https://github.com/microsoft/pyright/blob/main/docs/settings.md
           --   https://detachhead.github.io/basedpyright/
-          extraPaths = { "./python" },
-          typeCheckingMode = "standard", -- off, basic, standard, strict, all
+          extraPaths = { "./python", ".venv", },
+          typeCheckingMode = "off", -- off, basic, standard, strict, all
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           autoImportCompletions = true,
           diagnosticsMode = "openFilesOnly", -- or "workspace"
           diagnosticSeverityOverrides = {
-            reportUnknownMemberType = false,
-            reportUnknownArgumentType = false,
-            -- reportUnusedClass = "warning",
-            -- reportUnusedFunction = "warning",
-            reportUndefinedVariable = false, -- ruff can handle this (F822)
+            reportAny = "none",
+            reportDeprecated = "hint",
+            reportImplicitStringConcatenation = "none",
+            reportMissingParameterType = "none",
+            reportMissingTypeArgument = "none",
+            reportMissingTypeStubs = "none",
+            reportUnknownArgumentType = "none",
+            reportUnknownLambdaType = "none",
+            reportUnknownMemberType = "none",
+            reportUnknownParameterType = "none",
+            reportUnknownVariableType = "none",
+            reportUnusedCallResult = "none",
+            reportUndefinedVariable = "none", -- ruff can handle this (F822)
+            reportUninitializedInstanceVariable = "none",
+            reportUnannotatedClassAttribute = "none",
           },
         },
-        -- If you want to force a python binary:
-        pythonPath = vim.fn.exepath("python3"),
       },
     },
+    pythonPath = find_python_venv(),
   }
 end
 
--- 'basedpyright' uses the same settings as 'pyright', but you prefer it
--- if installed. This is how we automatically disable standard pyright if
--- basedpyright is available.
-M.basedpyright = function()
-  -- If you want to skip standard pyright:
-  -- (In your old config, it sets lsp_setup_opts["pyright"] = false)
-  return pyright_opts("basedpyright")
-end
-
 M.pyright = function()
-  -- If basedpyright is installed, we skip setting up normal pyright.
-  local mr = require("mason-registry")
-  if mr.is_installed("basedpyright") then
-    -- Return false to disable standard pyright
-    return false
-  end
-  return pyright_opts("python")
+  return false
+  -- -- If basedpyright is installed, we skip setting up normal pyright.
+  -- local mr = require("mason-registry")
+  -- if mr.is_installed("basedpyright") then
+  --   -- Return false to disable standard pyright
+  --   return false
+  -- end
+  -- return pyright_opts("python")
 end
 
 --------------------------------------------------------------------------------
@@ -67,7 +86,7 @@ M.ruff = {
     -- https://github.com/astral-sh/ruff-lsp#settings
     settings = {
       fixAll = true,
-      organizeImports = false, -- let isort handle import organizes if you prefer
+      organizeImports = true, -- let isort handle import organizes if you prefer
       args = {
         "--preview", -- use experimental features
         "--ignore",
