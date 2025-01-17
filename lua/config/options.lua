@@ -148,7 +148,7 @@ M._get_vim_opts = function()
     winblend = 0, -- (0 == opaque) ; floating window transparency,
     winminwidth = 10,
     winwidth = 30,
-    wrap = false,
+    wrap = true,
     writebackup = false,
   }
 end
