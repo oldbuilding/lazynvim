@@ -57,7 +57,7 @@ end
 
 -- 3) Keymap to invoke our multi-step pipeline
 vim.keymap.set("n", "<leader>cc", python_ruff_actions_and_save, {
-  desc = "Ruff'ly",
+  desc = "Ruff Acions",
 })
 
 ---------------------------------------------------------------------------------------------------------------------------
