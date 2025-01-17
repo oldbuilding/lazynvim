@@ -1,0 +1,50 @@
+-- local M = {}
+--
+-- M.theme_overrides = {
+--   dark = {
+--     emerald = {
+--       CursorLine = { bg = "#000000" }, -- darker gray
+--       TabLineSel = { link = "BufferLinePickSelected" },
+--     },
+--     -- tokyonight = {
+--     --   CursorLine = { bg = "#2f3448" },
+--     --   TabLineSel = { fg = "#c0caf5", bg = "#1a1b26", bold = true },
+--     -- },
+--   },
+--   light = {
+--     -- github_light = {
+--     --   CursorLine = { bg = "#f0f0f0" },
+--     --   TabLineSel = { fg = "#24292e", bg = "#b1bac4", bold = true },
+--     -- },
+--   },
+-- }
+--
+-- function M.apply_overrides()
+--   -- "dark" or "light"
+--   local bg_mode = vim.opt.background:get() or "dark"
+--   -- The currently loaded colorscheme name
+--   local scheme_name = vim.g.colors_name or "unknown"
+--   if scheme_name == "unknown" then return end
+--
+--   -- Attempt to find a match in our table
+--   local overrides_for_bg = M.theme_overrides[bg_mode]
+--   if not overrides_for_bg then
+--     return -- no config for this background
+--   end
+--
+--   local overrides_for_scheme = overrides_for_bg[scheme_name]
+--   if not overrides_for_scheme then
+--     return -- no config for this scheme
+--   end
+--
+--   for hl_group, hl_opts in pairs(overrides_for_scheme) do
+--     -- e.g. hl_group = "CursorLine", hl_opts = { bg = "#3c3836" }
+--     vim.api.nvim_set_hl(0, hl_group, hl_opts)
+--   end
+-- end
+--
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--   callback = function() M.apply_overrides() end,
+-- })
+--
+-- return M

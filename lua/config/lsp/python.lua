@@ -11,6 +11,7 @@ local function find_python_venv()
   for _, dirname in ipairs({ ".venv", ".pie" }) do
     local candidate = root .. "/" .. dirname .. "/bin/python"
     if vim.fn.executable(candidate) == 1 then
+      require("utils.logging").notify("pythonpath candidate found " .. candidate)
       return candidate
     end
   end
@@ -27,13 +28,18 @@ end
 
 M.basedpyright = function()
   return {
+    capabilities = {
+      general = {
+        positionEncodings = { "utf-16" },
+      },
+    },
     settings = {
-      python = {
+      basedpyright = {
         analysis = {
           -- For details, see:
           --   https://github.com/microsoft/pyright/blob/main/docs/settings.md
           --   https://detachhead.github.io/basedpyright/
-          extraPaths = { "./python", ".venv", },
+          extraPaths = { "./python", ".venv" },
           typeCheckingMode = "off", -- off, basic, standard, strict, all
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,

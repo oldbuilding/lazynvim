@@ -26,8 +26,8 @@ return {
     config = true,
     opts = {
       terminal_colors = true, -- add neovim terminal colors
-      undercurl = true,
-      underline = true,
+      undercurl = false,
+      underline = false,
       bold = true,
       italic = {
         strings = true,
@@ -37,10 +37,10 @@ return {
         folds = true,
       },
       strikethrough = true,
-      invert_selection = false,
-      invert_signs = false,
-      invert_tabline = false,
-      invert_intend_guides = false,
+      invert_selection = true,
+      invert_signs = true,
+      invert_tabline = true,
+      invert_intend_guides = true,
       inverse = true, -- invert background for search, diffs, statuslines and errors
       palette_overrides = {},
       overrides = {},
@@ -103,20 +103,21 @@ return {
     lazy = false,
     priority = 1000,
     opts = function()
+      local colors = require("starry.colors")
       require("starry").setup({
-        border = false, -- Split window borders
-        hide_eob = false, -- Hide end of buffer
+        border = true, -- Split window borders
+        hide_eob = true, -- Hide end of buffer
         italics = {
           comments = true, -- Italic comments
           strings = false, -- Italic strings
           keywords = false, -- Italic keywords
-          functions = false, -- Italic functions
+          functions = true, -- Italic functions
           variables = false, -- Italic variables
         },
         contrast = { -- Select which windows get the contrast background
           enable = true, -- Enable contrast
           terminal = true, -- Darker terminal
-          filetypes = { "*" }, -- Which filetypes get darker? e.g. *.vim, *.cpp, etc.
+          filetypes = { "*", "*.py", "*.sh", "*.lua" }, -- Which filetypes get darker? e.g. *.vim, *.cpp, etc.
         },
         text_contrast = {
           lighter = true, -- Higher contrast text for lighter style
@@ -128,19 +129,7 @@ return {
           eob_lines = false, -- Make end-of-buffer lines invisible
         },
         style = {
-          name = "middlenight_blue", -- other theme styles:
-          -- -- earliestsummer
-          -- -- moonlight
-          -- -- dracula
-          -- -- oceanic
-          -- -- 'dracula_blood'
-          -- -- 'deep ocean'
-          -- -- darker
-          -- -- palenight
-          -- -- monokai
-          -- -- mariana
-          -- -- emerald
-          -- -- 'middlenight_blue'
+          "emerald",
           disable = {}, -- a list of styles to disable, e.g. {'bold', 'underline'}
           fix = true,
           darker_contrast = true, -- More contrast for darker style
@@ -148,11 +137,11 @@ return {
           deep_black = true, -- Enable a deeper black background
         },
         custom_colors = {
-          variable = "#f797d7",
+          -- variable = "#f797d7",
         },
         custom_highlights = {
-          LineNr = { fg = "#777777" },
-          Idnetifier = { fg = "#ff4797" },
+          CursorLine = { bg = "#072408" },
+          BufferLineBufferSelected = { bg = "#f27961", fg = "##eef5df", bold = true },
         },
       })
     end,

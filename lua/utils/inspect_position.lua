@@ -57,7 +57,7 @@ M.show_hover = function(data, comment)
   vim.api.nvim_buf_set_keymap(buf, "n", "q", ":bd!<CR>", { noremap = true, silent = true })
 
   -- Optional: Add additional styling
-  vim.api.nvim_buf_set_option(buf, "winblend", 10) -- Transparency
+  vim.api.nvim_buf_set_option(buf, "winblend", 0) -- OPAQUE
 end
 
 return M

@@ -13,16 +13,12 @@ local function on_attach(client, bufnr)
 
   -- If you use lsp-status:
   local ok, lsp_status = pcall(require, "lsp-status")
-  if ok then
-    lsp_status.on_attach(client)
-  end
+  if ok then lsp_status.on_attach(client) end
 
   -- Example: nvim-navic for code context
   if client.server_capabilities.documentSymbolProvider then
     local ok_navic, navic = pcall(require, "nvim-navic")
-    if ok_navic then
-      navic.attach(client, bufnr)
-    end
+    if ok_navic then navic.attach(client, bufnr) end
   end
 
   -- Example: set up buffer-local mappings
@@ -105,7 +101,8 @@ function M.setup_handlers()
   vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
     local bufnr, winnr = border_hover(err, result, ctx, config)
     if winnr ~= nil then
-      vim.api.nvim_win_set_option(winnr, "winblend", 10)
+      vim.api.nvim_win_set_option(winnr, "winblend", 0)
+      vim.api.nvim_win_set_option(winnr, "pumblend", 0)
     end
     return bufnr, winnr
   end
@@ -149,12 +146,13 @@ function M.setup_lsp()
   -- D) If new servers are installed at runtime, set them up
   local registry = require("mason-registry")
   for _, pkg in ipairs(registry.get_installed_packages()) do
-    pkg:on("install:success", vim.schedule_wrap(function()
-      local mapped_name = mason_lspconfig.get_mapped_server_name(pkg.name)
-      if mapped_name then
-        setup_one_server(mapped_name)
-      end
-    end))
+    pkg:on(
+      "install:success",
+      vim.schedule_wrap(function()
+        local mapped_name = mason_lspconfig.get_mapped_server_name(pkg.name)
+        if mapped_name then setup_one_server(mapped_name) end
+      end)
+    )
   end
 
   -- E) Setup extra stuff
@@ -163,4 +161,3 @@ function M.setup_lsp()
 end
 
 return M
-

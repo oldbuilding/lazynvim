@@ -5,12 +5,12 @@ return {
     {
       "<leader>e",
       function()
-        local reveal_file_ = vim.fn.expand('%:p')
-        if (reveal_file_ == '') then
+        local reveal_file_ = vim.fn.expand("%:p")
+        if reveal_file_ == "" then
           reveal_file_ = vim.fn.getcwd()
         else
           local f = io.open(reveal_file_, "r")
-          if (f) then
+          if f then
             f.close(f)
           else
             reveal_file_ = vim.fn.getcwd()
@@ -35,17 +35,17 @@ return {
         })
       end,
       desc = "Explorer NeoTree (cwd)",
-    {
-      "<leader>fE",
-      function()
-        require("neo-tree.command").execute({
-          toggle = false,
-          focus = true,
-          dir = vim.uv.cwd(),
-        })
-      end,
-      desc = "Explorer NeoTree (cwd)",
-    },
+      {
+        "<leader>fE",
+        function()
+          require("neo-tree.command").execute({
+            toggle = false,
+            focus = true,
+            dir = vim.uv.cwd(),
+          })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
     },
     {
       "<leader>ge",
@@ -71,6 +71,7 @@ return {
           "obj",
           "node_modules",
           "__pycache__",
+          "'~'",
         },
         always_show_by_pattern = { -- uses glob style patterns
           ".env*",

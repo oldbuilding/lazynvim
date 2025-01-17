@@ -1,0 +1,14 @@
+-- vim.api.nvim_create_autocmd({ "TabEnter", "BufEnter" }, {
+--   callback = function(args)
+--     -- args.event tells you which event triggered this callback
+--     local event_fired = args.event
+--     if event_fired == "TabEnter" then
+--       -- do something specific for TabEnter
+--     else
+--       -- do something else for BufEnter
+--     end
+--     -- or a single unified action for both
+--     print("Triggered by: " .. event_fired)
+--   end,
+--   desc = "Combined autocommand for TabEnter and BufEnter",
+-- })
