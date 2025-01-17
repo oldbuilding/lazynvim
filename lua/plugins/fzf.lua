@@ -8,7 +8,7 @@ return {
         col = 0.5, -- 0 top, 1 bottom
         border = "rounded",
         -- Backdrop opacity, 0 is fully opaque, 100 is fully transparent (i.e. disabled)
-        backdrop = 0,
+        backdrop = 60,
         preview = {
           border = "rounded",
           wrap = true,

@@ -2,11 +2,14 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+vim.keymap.set({ "n" }, "<leader>fs", "<Cmd>w<CR>", { desc = "Save buffer" })
+vim.keymap.set({ "n" }, "<leader>fS", "<Cmd>wall<CR>", { desc = "Save all buffers" })
+
+vim.keymap.set({ "n" }, "<leader>uB", "<Cmd>set winblend=0<CR>", { desc = "Opaque!", silent = true, noremap = true })
+
 vim.keymap.set({ "n" }, ":", ";", { desc = "Swap ; with :", silent = true, noremap = true })
 vim.keymap.set({ "n" }, ";", ":", { desc = "Swap : with ;", silent = true, noremap = true })
-vim.keymap.set({"n"}, "<leader>uB", "<Cmd>set winblend=0<CR>", { desc="Opaque!", silent = true, noremap = true })
 
--- vim.keymap.set("n", "<leader>ui", function()
 --   -- Clear the message area first to avoid stale content
 --   vim.cmd("echo ''")
 --

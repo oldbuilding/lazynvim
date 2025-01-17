@@ -4,7 +4,7 @@
 
 local M = {}
 
-local transparency_amount = 33 -- 0 opaque to 100 transparent
+local transparency_amount = 0 -- 0 opaque to 100 transparent
 local update_time_ms = 300 -- save swap file and trigger CursorHold
 local keymap_sequence_timeout_ms = 250 -- time (ms) to wait for a mapped sequence to complete (default 1000)
 local spell_util = require("utils.spell")
@@ -14,8 +14,8 @@ local font_definition = { "VictorMonoNerdFontMono", ":h18" }
 M._get_vim_global_opts = function()
   return {
     guifont = font_definition,
-    mapleader = ",", -- Set space as the leader key
-    maplocalleader = " ", -- Set local leader key
+    mapleader = " ", -- Set space as the leader key
+    maplocalleader = ",", -- Set local leader key
     -- python3_host_prog = '/path/to/python3',  -- Register Python 3 for Neovim
     eof = true,
     fixeof = true,
@@ -148,7 +148,7 @@ M._get_vim_opts = function()
     winblend = 0, -- (0 == opaque) ; floating window transparency,
     winminwidth = 10,
     winwidth = 30,
-    wrap = false,
+    wrap = true,
     writebackup = false,
   }
 end
