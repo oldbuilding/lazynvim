@@ -4,7 +4,7 @@
 
 local M = {}
 
-local transparency_amount = 0 -- 0 opaque to 100 transparent
+-- local transparency_amount = 0 -- 0 opaque to 100 transparent
 local update_time_ms = 300 -- save swap file and trigger CursorHold
 local keymap_sequence_timeout_ms = 250 -- time (ms) to wait for a mapped sequence to complete (default 1000)
 local spell_util = require("utils.spell")
@@ -76,7 +76,7 @@ M._get_vim_opts = function()
     mouse = "a",
     number = true,
     numberwidth = 4,
-    pumblend = transparency_amount, -- popup win transparency,
+    pumblend = 0, -- popup win transparency,
     pumheight = 15, -- max items in popup,
     relativenumber = true,
     ruler = false,

@@ -18,6 +18,14 @@ return {
       spacing = 2,
     }
 
+    opts.spec = {
+      {
+        mode = { "n", "v" },
+        { "<leader>t", group = "Hotkeys" },
+        { "gs", group = "surround" },
+      },
+    }
+
     return opts
   end,
 }

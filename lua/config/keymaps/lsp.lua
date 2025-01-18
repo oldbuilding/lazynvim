@@ -1,6 +1,6 @@
-vim.keymap.set({ "n" }, "<leader>ci", "<Cmd>ConformInfo<CR>", { desc = "ConformInfo", silent = true, noremap = true })
+local M = {}
 
-vim.keymap.set({ "n" }, "<leader>xr", "<Cmd>LspRestart *<CR>", { desc = "Lsp Restart *", silent = true, noremap = true })
+vim.keymap.set({ "n" }, "<leader>ci", "<Cmd>ConformInfo<CR>", { desc = "ConformInfo", silent = true, noremap = true })
 
 ---------------------------------------------------------------------------------------------------------------------------
 ---
@@ -34,7 +34,7 @@ end
 --    - Ruff organizeImports
 --    - Format
 --    - Save
-local function python_ruff_actions_and_save()
+M.python_ruff_actions_and_save = function()
   -- a) Check filetype
   if vim.bo.filetype ~= "python" then
     vim.cmd("write")
@@ -55,11 +55,7 @@ local function python_ruff_actions_and_save()
   vim.cmd("write")
 end
 
--- 3) Keymap to invoke our multi-step pipeline
-vim.keymap.set("n", "<leader>cc", python_ruff_actions_and_save, {
-  desc = "Ruff'ly",
-})
-
+return M
 ---------------------------------------------------------------------------------------------------------------------------
 
 -- local function format_and_save_current()

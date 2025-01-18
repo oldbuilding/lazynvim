@@ -1,0 +1,23 @@
+-- local M = {}
+--
+-- --- Rewrite LHS strings in a table of keymaps, based on a list of {before, after} replacements.
+-- ---
+-- --- @param keys table[]        # the default_keys table, e.g. from a plugin spec's keys() function
+-- --- @param replacements table  # list of { before=<string or pattern>, after=<string> }
+-- ---                           #   e.g. { { before="^<leader>t", after="<leader>T" }, ... }
+-- ---
+-- --- @return table[]            # the same table of keys, with modified 'lhs'
+-- function M.rewrite_keys(keys, replacements)
+--   for _, mapping in ipairs(keys) do
+--     local lhs = mapping[1]
+--     if type(lhs) == "string" then
+--       for _, repl in ipairs(replacements) do
+--         local before, after = repl.before, repl.after
+--         mapping[1] = mapping[1]:gsub(before, after)
+--       end
+--     end
+--   end
+--   return keys
+-- end
+--
+-- return M

@@ -1,3 +1,5 @@
+if true then return {} end
+
 --- config/pynvim
 ---@return fun(): boolean
 -- Set the g:python3_host_prog variable to path to python3 in $PATH.

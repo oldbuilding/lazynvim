@@ -16,7 +16,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("utils.env").setup()
-require("config.options").setup()
 require("config.colorschemes")
 require("config.buffers")
 
@@ -117,3 +116,5 @@ require("lazy").setup({
     server = "https://nvim-neorocks.github.io/rocks-binaries/",
   },
 })
+
+require("config.options").setup()

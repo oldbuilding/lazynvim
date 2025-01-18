@@ -1,6 +1,6 @@
 -- lib/python
 -- Utilities and functions specific to python
--- https://github.com/wookayin/dotfiles/blob/master/nvim/lua/lib/python.lua
+-- https://github.com/wookayin/dotfiles/blob/master/nvim/lua/lib/python.lua
 
 local M = {}
 
