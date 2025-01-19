@@ -1,9 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  config = function(_, opts)
-    -- Just call your big config file, passing LazyVim’s opts:
-    require("config.treesitter").setup(opts)
-  end,
+  config = function(_, opts) require("config.treesitter").setup(opts) end,
 }
 
 -- if true then return {} end

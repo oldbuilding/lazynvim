@@ -2,8 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-vim.keymap.set({ "n" }, "<leader>fs", "<Cmd>w<CR>", { desc = "Save buffer" })
-vim.keymap.set({ "n" }, "<leader>fS", "<Cmd>wall<CR>", { desc = "Save all buffers" })
+vim.keymap.set({ "n" }, "<leader>fs", "<Cmd>wall<CR>", { desc = "Save all buffers" })
+vim.keymap.set({ "n" }, "<leader>fS", "<Cmd>w<CR>", { desc = "Save buffer" })
 
 vim.keymap.set({ "n" }, "<leader>uB", "<Cmd>set winblend=0<CR>", { desc = "Opaque!", silent = true, noremap = true })
 

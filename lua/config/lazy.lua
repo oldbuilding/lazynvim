@@ -60,7 +60,7 @@ require("lazy").setup({
       "zaibatsu",
     },
   },
-  colorscheme = "tokyonight-day", -- "oh-lucy-evening",
+  colorscheme = "emerald", -- "tokyonight-day", -- "oh-lucy-evening",
   background = "dark",
   ui = {
     backdrop = 0, -- 0 opaque, 100 transparent

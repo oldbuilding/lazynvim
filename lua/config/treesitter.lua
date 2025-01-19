@@ -1,5 +1,3 @@
-if true then return {} end
-
 -- config/treesitter.lua
 -- A cleaned-up and LazyVim-friendly version of the original file.
 -- This merges your custom logic with LazyVim’s `opts`, so both sets

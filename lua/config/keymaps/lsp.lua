@@ -56,18 +56,5 @@ M.python_ruff_actions_and_save = function()
 end
 
 return M
----------------------------------------------------------------------------------------------------------------------------
 
--- local function format_and_save_current()
---   -- Synchronous formatting (blocks until done):
---   vim.lsp.buf.format({
---     async = false,
---     filter = function(client)
---       -- Optionally choose which client(s) to do the formatting
---       return client.name ~= "some_other_language_server"
---     end,
---   })
---   vim.cmd("write")
--- end
---
--- vim.keymap.set("n", "<leader>fs", format_and_save_current, { desc = "Format & Save buffer" })
+---------------------------------------------------------------------------------------------------------------------------

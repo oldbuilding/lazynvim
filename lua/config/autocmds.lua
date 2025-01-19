@@ -45,22 +45,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     local current_colorscheme = vim.g.colors_name
     if current_colorscheme == nil or current_colorscheme == "night-owl" then
-      vim.cmd.colorscheme("tokyonight-day") -- Set your default fallback colorscheme
+      vim.cmd.colorscheme("emerald") -- Set your default fallback colorscheme
       vim.notify("Colorscheme: " .. (vim.g.colors_name or "none"), vim.log.levels.DEBUG, { title = "Colorscheme" })
     end
   end,
 })
 
 -- vim.api.nvim_create_autocmd("User", {
---   pattern = "*", -- Catch all patterns
---   callback = function(event)
---     local pattern = event.match or "nil"
---     if pattern:match("^Lazy") then
---       -- Skip events starting with "Lazy"
---       return
---     end
---     vim.notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), vim.log.levels.DEBUG, { title = "Event Logger" })
---     -- require("utils.logging").notify("Triggered User event: " .. event.event .. ", pattern: " .. (event.match or "nil"), "DEBUG")
---   end,
--- })
---
