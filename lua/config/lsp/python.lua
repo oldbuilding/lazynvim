@@ -92,10 +92,18 @@ M.ruff = {
     -- https://github.com/astral-sh/ruff-lsp#settings
     settings = {
       fixAll = true,
-      organizeImports = true, -- let isort handle import organizes if you prefer
+      organizeImports = true, -- let pymple do
+      lint = {
+        enable = true,
+      },
+      format = {
+        preview = true,
+      },
       args = {
         "--preview", -- use experimental features
         "--ignore",
+        "--add-noqa",
+        "--watch",
         table.concat({
           "E111", -- indentation-with-invalid-multiple
           "E114", -- indentation-with-invalid-multiple-comment

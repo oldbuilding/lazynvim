@@ -103,6 +103,7 @@ M._get_vim_opts = function()
     syntax = "on",
     tabstop = 2,
     textwidth = 100,
+    termguicolors = true,
     timeoutlen = keymap_sequence_timeout_ms, -- time (ms) to wait for a mapped sequence to complete (default 1000),
     ttimeoutlen = 50, -- time (ms) to wait for a key code sequence to complete (default 50),
     undodir = "~/.cache/" .. os.getenv("NVIM_APPNAME") .. "/undo/",
