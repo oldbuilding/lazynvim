@@ -5,19 +5,38 @@ return {
   config = function()
     require("nvim-surround").setup({
       keymaps = {
-        normal = "<leader>sa",
-        normal_cur = false,
-        normal_line = false,
-        normal_cur_line = false,
-        visual = "<leader>s",
-        visual_line = "<leader>S",
-        delete = "<leader>sd",
-        change = "<leader>sr",
+        normal = "gaa", -- Surround a motion (`saaiw"` → "word")
+        normal_cur = "gaa", -- Surround current line (same as normal)
+        delete = "gad", -- Delete surrounding (`sad"` → removes `word`)
+        change = "gac", -- Change surrounding (`sac"` → change surrounding)
+        visual = "gav", -- Surround selection in visual mode
+        visual_line = "gal", -- Surround entire line in visual mode
       },
+      -- All mappings start with sa (Surround Actions):
+      -- 	•	saa" → Surround a word with " (instead of ysiw")
+      -- 	•	sad" → Delete surrounding "
+      -- 	•	sac" → Change surrounding "
+      --
+      -- Visual mode mappings:
+      -- 	•	sav" → Surround visual selection with "
+      -- 	•	sal" → Surround entire selected line.
+      --
+      -- Aliases allow using simpler keys:
+      -- 	•	saa] works just like saa] (aliasing [ to ]).
+      -- 	•	saa} is treated as saa} (aliasing { to }).
+      -- 	•	saa' is treated as saa' (aliasing single quotes).
       aliases = {
-        ["i"] = "]", -- Index
-        ["r"] = ")", -- Round
-        ["b"] = "}", -- Brackets
+        --   ["i"] = "]", -- Index
+        --   ["r"] = ")", -- Round
+        --   ["b"] = "}", -- Brackets
+        -- Use "sa" as the prefix for all
+        ["ga]"] = "]", -- Index → `saa]`
+        ["ga)"] = ")", -- Round → `saa)`
+        ["ga}"] = "}", -- Brackets → `saa}`
+        ["ga'"] = "'", -- Single Quotes → `saa'`
+        ['ga"'] = '"', -- Double Quotes → `saa"`
+        ["ga<"] = "<", -- Angle Brackets → `saa<`
+        ["ga`"] = "`", -- Backticks → `saa``
       },
       move_cursor = false,
     })
