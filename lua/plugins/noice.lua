@@ -36,7 +36,7 @@ return {
         },
         cmdline_popup = {
           position = {
-            row = "50%",
+            row = "20%",
             col = "50%",
           },
           size = {
@@ -45,7 +45,7 @@ return {
           },
           border = {
             style = "rounded",
-            padding = { 1, 1 },
+            padding = { 2, 1 },
           },
           win_options = {
             winblend = 0, -- opaque
