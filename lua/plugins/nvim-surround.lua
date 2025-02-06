@@ -5,12 +5,12 @@ return {
   config = function()
     require("nvim-surround").setup({
       keymaps = {
-        normal = "gaa", -- Surround a motion (`saaiw"` → "word")
-        normal_cur = "gaa", -- Surround current line (same as normal)
-        delete = "gad", -- Delete surrounding (`sad"` → removes `word`)
-        change = "gac", -- Change surrounding (`sac"` → change surrounding)
-        visual = "gav", -- Surround selection in visual mode
-        visual_line = "gal", -- Surround entire line in visual mode
+        normal = "<leader>Ga", -- Surround a motion (`saaiw"` → "word")
+        normal_cur = "<leader>Ga", -- Surround current line (same as normal)
+        delete = "<leader>Gad", -- Delete surrounding (`sad"` → removes `word`)
+        change = "<leader>Gac", -- Change surrounding (`sac"` → change surrounding)
+        visual = "<leader>Gav", -- Surround selection in visual mode
+        visual_line = "<leader>Gal", -- Surround entire line in visual mode
       },
       -- All mappings start with sa (Surround Actions):
       -- 	•	saa" → Surround a word with " (instead of ysiw")
@@ -30,13 +30,14 @@ return {
         --   ["r"] = ")", -- Round
         --   ["b"] = "}", -- Brackets
         -- Use "sa" as the prefix for all
-        ["ga]"] = "]", -- Index → `saa]`
-        ["ga)"] = ")", -- Round → `saa)`
-        ["ga}"] = "}", -- Brackets → `saa}`
-        ["ga'"] = "'", -- Single Quotes → `saa'`
-        ['ga"'] = '"', -- Double Quotes → `saa"`
-        ["ga<"] = "<", -- Angle Brackets → `saa<`
-        ["ga`"] = "`", -- Backticks → `saa``
+        ["Ga]"] = "]", -- Index → `saa]`
+        ["Ga0"] = ")", -- Round → `saa)`
+        ["Ga9"] = "(", -- Round → `saa)`
+        ["Ga}"] = "}", -- Brackets → `saa}`
+        ["Ga'"] = "'", -- Single Quotes → `saa'`
+        ['Ga"'] = '"', -- Double Quotes → `saa"`
+        ["Ga<"] = "<", -- Angle Brackets → `saa<`
+        ["Ga`"] = "`", -- Backticks → `saa``
       },
       move_cursor = false,
     })
