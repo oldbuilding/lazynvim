@@ -2,33 +2,26 @@ return {
   "folke/which-key.nvim",
   opts = function(_, opts)
     opts = opts or {}
-    opts.preset = "modern" -- "classic", "modern", "helix"
+    opts.preset = "helix" -- "classic", "modern", "helix"
     opts.icons = {
       separator = " │",
       breadcrumb = ">",
     }
-    -- opts.win = {
-    --   height = {
-    --     max = math.huge,
-    --   },
-    --   padding = { 0, 2 }, -- Add padding around the popup
-    -- }
     opts.win = {
       height = {
-        max = 10, -- Restricts max height for better bottom placement
+        max = math.huge,
       },
-      title = true,
+      title = false,
       title_pos = "center",
       col = 0.5,
       padding = { 0, 2 },
-      -- position = { row = "95%", col = "50%" }, -- Moves it to the bottom center
-      -- anchor = "S", -- Anchors from the bottom
     }
-    opts.layout = {
-      align = "center",
-      width = { min = 20, max = 30 },
-      spacing = 1,
-    }
+    -- opts.layout = {
+    --   align = "right",
+    --   width = { min = 20, max = 40 },
+    --   columns = 1,
+    --   spacing = 1,
+    -- }
     -- opts.modes = {
     --     i = false,
     --     x = false, -- Visual mode
