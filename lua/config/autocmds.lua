@@ -51,4 +51,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("User", {
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained" }, {
+  callback = function() vim.cmd("checktime") end,
+})

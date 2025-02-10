@@ -31,6 +31,7 @@ M._get_vim_opts = function()
     spellfile = spellfile_path .. spellfile_name,
     spelllang = { "en_us" },
     spelloptions = "camel",
+    autoread = true,
     autowrite = true,
     bomb = false,
     binary = false,
