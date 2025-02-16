@@ -160,8 +160,8 @@ return {
     "racagogi/mytilus",
     lazy = false,
     priority = 1000,
-    opts = function()
-      return {
+    config = function()
+      require("mytilus").setup({
         theme = "mytilus-light", -- can be light, dark or mytilus_dark
         options = {
           sideBarDim = true, --if false then sidebar bg is same normal
@@ -176,10 +176,7 @@ return {
           keyword = "italic",
         },
         overides = {}, -- ["@string"] = { fg = "#222222", italic = true },
-      }
-    end,
-    config = function(_, opts)
-      require("mytilus").setup(opts)
+      })
       vim.cmd("colorscheme mytilus-light")
     end,
   },
