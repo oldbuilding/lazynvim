@@ -161,23 +161,24 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("mytilus").setup({
-        theme = "mytilus-light", -- can be light, dark or mytilus_dark
+      require("mytilus.configs").setup({
+        theme = "light", -- can be light, dark or mytilus_dark
         options = {
           sideBarDim = true, --if false then sidebar bg is same normal
           statusBarRevers = true, --if false, statusBarRevers bg is d2_black,
           NCWindowDim = true, --if false, not current window bg is same normal
-          -- "none", "bold", "italic"
-          constant = "bold",
-          str = "none",
-          func = "bold",
-          type = "italic",
-          statement = "none",
-          keyword = "italic",
+          str = { bold = true },
+          func = { bold = true, italic = true },
+          type = { italic = true },
+          statement = { italic = false },
+          keyword = { bold = true },
+          constant = { bold = true },
+          comment = { bold = true },
+          doc = { bold = false, italic = true },
         },
-        overides = {}, -- ["@string"] = { fg = "#222222", italic = true },
+        overides = {}, -- ["@string"] = { fg = "#222222", italic = true },-
       })
-      vim.cmd("colorscheme mytilus-light")
+      vim.cmd("colorscheme mytilus")
     end,
   },
   {

@@ -45,6 +45,19 @@ return {
         end,
         desc = "Format and Save",
       },
+      -- {
+      --   mode = "n",
+      --   "<leader>@",
+      --   function()
+      --     if vim.fn.reg_recording() ~= "" then
+      --       vim.cmd("normal! @")
+      --     else
+      --       local reg = vim.fn.input("Macro register: ")
+      --       if reg ~= "" then vim.cmd("normal! q" .. reg) end
+      --     end
+      --   end,
+      --   desc = "Toggle Macro Recording",
+      -- },
     })
     -- opts.spec = {
     --   {

@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     local current_colorscheme = vim.g.colors_name
     if current_colorscheme == nil or current_colorscheme == "night-owl" then
-      vim.cmd.colorscheme("emerald") -- Set your default fallback colorscheme
+      vim.cmd.colorscheme("tokyonight-night") -- Set your default fallback colorscheme
       vim.notify("Colorscheme: " .. (vim.g.colors_name or "none"), vim.log.levels.DEBUG, { title = "Colorscheme" })
     end
   end,
