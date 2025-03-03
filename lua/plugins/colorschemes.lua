@@ -160,6 +160,7 @@ return {
     "racagogi/mytilus",
     lazy = false,
     priority = 1000,
+    enabled = false,
     config = function()
       require("mytilus.configs").setup({
         theme = "light", -- can be light, dark or mytilus_dark

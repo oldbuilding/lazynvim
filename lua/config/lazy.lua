@@ -63,7 +63,7 @@ require("lazy").setup({
   colorscheme = "tokyonight-night", -- "emerald", -- "tokyonight-day", -- "oh-lucy-evening",
   background = "dark",
   ui = {
-    backdrop = 0, -- 0 opaque, 100 transparent
+    backdrop = 100, -- 0 opaque, 100 transparent
     border = "rounded",
     wrap = true,
   },
