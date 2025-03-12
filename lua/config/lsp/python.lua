@@ -16,7 +16,16 @@ local function find_python_venv()
     end
   end
 
-  -- 3) If none found, fallback to system python3 in PATH
+  -- 3) Check if there's an active venv from environment variable VIRTUAL_ENV
+  local active_venv = os.getenv("VIRTUAL_ENV")
+  if active_venv then
+    local candidate = active_venv .. "/bin/python"
+    if vim.fn.executable(candidate) == 1 then
+      require("utils.logging").notify("pythonpath active venv candidate found " .. candidate)
+      return candidate
+    end
+  end
+  -- 4) Fallback to system python3 in PATH
   return vim.fn.exepath("python3")
 end
 
