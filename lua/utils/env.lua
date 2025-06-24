@@ -21,8 +21,8 @@ M.get_hererocks_path = function()
 end
 
 M.get_python3_host_prog = function()
-  local python3_host_prog = os.getenv("brewpythonpath")
-  -- vim.api.nvim_echo({ { "python3_host_prog -> " .. python3_host_prog, "DEBUG" } }, false, {})
+  local python3_host_prog = os.getenv("NEOVIM_PYTHON3_VENV_PATH") or vim.fn.expand("~/.local/venvs/nvim/bin/python3")
+  vim.g.python3_host_prog = python3_host_prog
   return python3_host_prog
 end
 
@@ -53,6 +53,8 @@ M.setup = function()
   -- vim.api.nvim_echo({ { "LUA_CPATH -> " .. vim.env.LUA_CPATH, "DEBUG" } }, false, {})
 
   vim.env.PATH = hererocks_path .. "/bin:" .. vim.env.PATH
+
+  M.get_python3_host_prog()
 end
 
 return M

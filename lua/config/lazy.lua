@@ -69,7 +69,7 @@ require("lazy").setup({
   },
   checker = {
     enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
+    notify = true, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
     rtp = {
@@ -112,7 +112,8 @@ require("lazy").setup({
   },
   rocks = {
     enabled = true,
-    root = vim.fn.stdpath("data") .. "/lazy-rocks",
+    root = require("utils.env").get_hererocks_path() .. "/lazy-rocks",
+    -- root = vim.fn.stdpath("data") .. "/lazy-rocks",
     server = "https://nvim-neorocks.github.io/rocks-binaries/",
   },
 })
