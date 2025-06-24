@@ -32,4 +32,4 @@ return {
 
     return opts
   end,
-}eturn {
+}
