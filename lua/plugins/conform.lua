@@ -6,8 +6,9 @@ return {
     opts.format_after_save = nil
     opts.formatters_by_ft = {
       python = { "ruff_format", "ruff_organize_imports" },
-      lua = {"stylua"},
-      bash = {"shfmt"},
+      lua = { "stylua" },
+      bash = { "shfmt" },
     }
-  end
+  end,
 }
+
