@@ -61,9 +61,10 @@ end
 -----------------------------------------------------------------------------
 
 function M.setup(opts)
-  local ts_configs = require("nvim-treesitter.configs")
+  -- In LazyVim v15 with nvim-treesitter main branch, the API has changed
+  -- We no longer use nvim-treesitter.configs, instead we use the direct setup
 
-  -- 1) Merge your custom highlight defaults into LazyVim’s `opts`.
+  -- 1) Merge your custom highlight defaults into LazyVim's `opts`.
   --    If you already set highlight somewhere else, tweak logic below:
   opts.highlight = opts.highlight or {}
   -- Example: override highlight.enable if not set by LazyVim
@@ -103,8 +104,9 @@ function M.setup(opts)
   opts.playground = opts.playground or {}
   opts.playground.enable = vim.fn.has("nvim-0.10") == 0 -- only if <0.10
 
-  -- 5) Finally call the nvim-treesitter setup with merged opts
-  ts_configs.setup(opts)
+  -- 5) In LazyVim v15, treesitter setup is handled by LazyVim itself
+  -- We just need to ensure our custom options are merged
+  -- The actual setup is done by LazyVim's treesitter plugin
 
   -- 6) Optional: set up folding based on treesitter
   vim.opt.foldmethod = "expr"

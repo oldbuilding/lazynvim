@@ -50,7 +50,7 @@ local servers_config = {
   ruff = require("config.lsp.python").ruff,
   pyright = require("config.lsp.python").pyright,
   lua_ls = require("config.lsp.lua_ls").lua_ls,
-  yaml_language_server = require("config.lsp.yamlls").yaml_language_server,
+  yamlls = require("config.lsp.yamlls").yamlls,
   clangd = require("config.lsp.clangd").clangd,
   bashls = require("config.lsp.bashls").bashls,
 }
@@ -75,6 +75,21 @@ local function setup_one_server(server_name)
   -- Add your common on_attach/capabilities:
   config.on_attach = on_attach
   -- e.g. config.capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+  -- Special handling for ruff to ensure formatting is enabled
+  if server_name == "ruff" then
+    local original_on_attach = config.on_attach
+    config.on_attach = function(client, bufnr)
+      -- Enable formatting for ruff (moved from python-lsp.lua)
+      if client.server_capabilities then
+        client.server_capabilities.documentFormattingProvider = true
+      end
+      -- Call the original on_attach
+      if original_on_attach then
+        original_on_attach(client, bufnr)
+      end
+    end
+  end
 
   lspconfig[server_name].setup(config)
 end
@@ -101,8 +116,8 @@ function M.setup_handlers()
   vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
     local bufnr, winnr = border_hover(err, result, ctx, config)
     if winnr ~= nil then
-      vim.api.nvim_win_set_option(winnr, "winblend", 0)
-      vim.api.nvim_win_set_option(winnr, "pumblend", 0)
+      vim.wo[winnr].winblend = 0
+      vim.wo[winnr].pumblend = 0
     end
     return bufnr, winnr
   end
@@ -158,6 +173,23 @@ function M.setup_lsp()
   -- E) Setup extra stuff
   M.setup_diagnostics()
   M.setup_handlers()
+
+  -- F) LSP-based folding is handled by LazyVim automatically
+
+  -- G) Use mason-lspconfig setup_handlers for automatic server setup
+  mason_lspconfig.setup_handlers({
+    -- Default handler for all servers
+    function(server_name)
+      setup_one_server(server_name)
+    end,
+    -- Specific handlers for Python servers
+    ruff = function()
+      setup_one_server("ruff")
+    end,
+    basedpyright = function()
+      setup_one_server("basedpyright")
+    end,
+  })
 end
 
 return M

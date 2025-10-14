@@ -1,6 +1,46 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  config = function(_, opts) require("config.treesitter").setup(opts) end,
+  branch = "main", -- LazyVim v15 uses main branch
+  build = ":TSUpdate",
+  opts_extend = { "ensure_installed" },
+  opts = {
+    ensure_installed = {
+      "bash",
+      "c",
+      "json",
+      "jsonc",
+      "lua",
+      "luadoc",
+      "luap",
+      "markdown",
+      "markdown_inline",
+      "printf",
+      "python",
+      "query",
+      "regex",
+      "toml",
+      "vim",
+      "xml",
+      "yaml",
+    },
+    highlight = {
+      enable = true,
+      disable = {
+        "fzf",
+        "GV",
+        "gitmessengerpopup",
+        "fugitive",
+        "NvimTree",
+      },
+      additional_vim_regex_highlighting = { "python" },
+    },
+    playground = {
+      enable = vim.fn.has("nvim-0.10") == 0, -- only if <0.10
+    },
+  },
+  config = function(_, opts)
+    require("config.treesitter").setup(opts)
+  end,
 }
 
 -- if true then return {} end

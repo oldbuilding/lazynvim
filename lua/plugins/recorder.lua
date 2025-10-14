@@ -1,6 +1,9 @@
 return {
   "chrisgrieser/nvim-recorder",
-  dependencies = "rcarriga/nvim-notify",
+  dependencies = {
+    -- Disabled nvim-notify to prevent conflicts with Noice
+    -- "rcarriga/nvim-notify",
+  },
   keys = {
     -- these must match the keys in the mapping config below
     { "@", desc = " Start Recording" },

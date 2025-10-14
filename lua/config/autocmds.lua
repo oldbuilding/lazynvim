@@ -21,9 +21,8 @@ vim.api.nvim_create_autocmd("BufReadPre", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-  callback = function() vim.lsp.buf.format({ async = true }) end,
-})
+-- Format on save is handled by conform.nvim and custom keymaps
+-- Removed duplicate format-on-save to avoid double formatting
 
 vim.api.nvim_create_user_command("CopyMessages", function()
   local messages = vim.fn.execute("messages")
@@ -31,15 +30,8 @@ vim.api.nvim_create_user_command("CopyMessages", function()
   print("Messages copied to clipboard!")
 end, {})
 
-vim.api.nvim_create_autocmd("VimResized", {
-  group = vim.api.nvim_create_augroup("snacks_notifier", {}),
-  callback = function()
-    for _, notif in pairs(self.queue) do
-      notif.dirty = true
-    end
-    -- self.sorted = nil
-  end,
-})
+-- Removed broken VimResized autocmd that referenced undefined 'self'
+-- This was likely meant for a different context (snacks notifier)
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()

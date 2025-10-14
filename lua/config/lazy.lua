@@ -15,6 +15,10 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+-- Set map leader before LazyVim loads (required for newer versions)
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
 require("utils.env").setup()
 require("config.colorschemes")
 require("config.buffers")

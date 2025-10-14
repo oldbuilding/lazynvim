@@ -132,6 +132,14 @@ M.ruff = {
       positionEncodings = { "utf-16" },
     },
   },
+  on_init = function(client, _)
+    if client.server_capabilities then
+      -- Disable ruff's hover provider, preferring Pyright
+      client.server_capabilities.hoverProvider = false
+      -- Keep ruff's formatting provider enabled for Python formatting
+      client.server_capabilities.documentFormattingProvider = true
+    end
+  end,
 }
 
 -- If you want to handle on_init for ruff (e.g. disable ruff hover):
@@ -139,8 +147,8 @@ M.ruff_on_init = function(client, _)
   if client.server_capabilities then
     -- Disable ruff's hover provider, preferring Pyright
     client.server_capabilities.hoverProvider = false
-    -- Also disable ruff's formatting provider, if you prefer black/yapf
-    client.server_capabilities.documentFormattingProvider = false
+    -- Keep ruff's formatting provider enabled for Python formatting
+    -- client.server_capabilities.documentFormattingProvider = false
   end
 end
 

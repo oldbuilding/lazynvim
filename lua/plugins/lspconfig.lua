@@ -1,12 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
-  dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "nvim-lua/plenary.nvim",
-    "nvim-lua/popup.nvim",
-  },
   opts = function(_, opts)
+    -- Add f-string toggle keymap for Python
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -22,7 +17,6 @@ return {
             -- Improved regex to handle any position in the line
             local start_pos, prefix, quote, remainder = line:match("()([rubf])[\"'](.*)")
             if not start_pos or not quote then return end -- No valid string detected
-            print("start_pos", (start_pos or "NONE"), "prefix", prefix, "quote", quote, "remainder", remainder)
 
             -- Ensure remainder is a valid string
             remainder = remainder or ""
@@ -54,6 +48,7 @@ return {
         end
       end,
     })
+
+    return opts
   end,
-  config = function(_, _) require("config.lsp").setup_lsp() end,
 }

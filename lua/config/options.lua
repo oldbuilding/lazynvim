@@ -14,8 +14,7 @@ local font_definition = { "VictorMonoNerdFontMono", ":h18" }
 M._get_vim_global_opts = function()
   return {
     guifont = font_definition,
-    mapleader = " ", -- Set space as the leader key
-    maplocalleader = ",", -- Set local leader key
+    -- mapleader and maplocalleader are now set in config/lazy.lua before LazyVim loads
     -- python3_host_prog = '/path/to/python3',  -- Register Python 3 for Neovim
     eof = true,
     fixeof = true,
@@ -168,7 +167,6 @@ M.setup = function()
   end
 end
 
--- must call setup() because lazyvim will not
-M.setup()
+-- setup() is called explicitly in config/lazy.lua
 
 return M

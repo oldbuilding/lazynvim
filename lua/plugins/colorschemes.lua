@@ -330,7 +330,7 @@ return {
   {
     "nyoom-engineering/oxocarbon.nvim",
   },
-  { "echasnovski/mini.base16", version = false },
+  { "nvim-mini/mini.base16", version = false },
   { "rose-pine/neovim", version = false },
   { "xero/miasma.nvim", version = false },
   { "navarasu/onedark.nvim", version = false },
